@@ -10,7 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "i";
+  #networking.hostName = "";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Bogota";
@@ -47,4 +47,3 @@
 
   system.stateVersion = "18.09";
 }
-
