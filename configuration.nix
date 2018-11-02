@@ -67,5 +67,8 @@
     home = "/x";
     extraGroups = ["networkmanager"];
   };
+
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+  virtualisation.libvirtd.enable = true;
 }
 
