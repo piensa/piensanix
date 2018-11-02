@@ -1,29 +1,57 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
-    [ 
-      ./hardware-configuration.nix
+    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
+
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-label/nixos";
+      fsType = "btrfs";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-label/boot";
+      fsType = "vfat";
+    };
+
+  swapDevices = [ ];
+
+  nix.maxJobs = lib.mkDefault 8;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
-  #networking.hostName = "";
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "America/Bogota";
+  system.stateVersion = "18.09"; 
 
   environment.systemPackages = with pkgs; [
-    # server
     wget vim tmux htop git ripgrep
-    # code
+    gnumake gcc libcxx libcxxabi llvm ninja clang
+    python3 nodejs go
     firefox kmail vscode vlc
-    # design
-    # blender godot gimp inkscape
+    blender godot gimp inkscape
+    libreoffice
   ];
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
+  networking.networkmanager.enable = true;
+  networking.hostName = "x";
+  time.timeZone = "America/Bogota";
+
+  i18n = {
+    consoleFont = "lat9w-16";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
+  };
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -37,13 +65,7 @@
   users.users.x = {
     isNormalUser = true;
     home = "/x";
-    description = "x";
-    extraGroups = ["wheel" "networkmanager"];
+    extraGroups = ["networkmanager"];
   };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
-  system.stateVersion = "18.09";
 }
+
