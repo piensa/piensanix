@@ -25,8 +25,7 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ { device = "/dev/disk/by-label/swap"; }
-  ];
+  swapDevices = [ { device = "/dev/disk/by-label/swap"; }];
 
   nix.maxJobs = lib.mkDefault 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
@@ -71,8 +70,23 @@
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.layout = "es";
 
-  services.printing.enable = true;
-  services.printing.drivers = with pkgs; [ hplip ];
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends=[ pkgs.samsung-unified-linux-driver_1_00_37 ];
+  nix.readOnlyStore=false;
+  services.printing.enable=true;
+  services.printing.drivers=[ pkgs.samsung-unified-linux-driver_1_00_37 ];
+
+
+  services.avahi.enable = true;
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
+
+  services.printing.browsing = true;
+  services.printing.listenAddresses = [ "*:631" ];
+  services.printing.defaultShared = true; # If you want
+
+  networking.firewall.allowedUDPPorts = [ 631 ];
+  networking.firewall.allowedTCPPorts = [ 631 ];
 
   users.users.x = {
     isNormalUser = true;
@@ -81,3 +95,4 @@
   };
 
 }
+
