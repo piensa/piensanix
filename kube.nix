@@ -6,8 +6,10 @@ in {
 
   networking.extraHosts = ''
     127.0.0.1 ${domain} .${domain}
+    127.0.0.1 master.${domain}
   '';
 
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   environment.systemPackages = with pkgs; [
     kubectl

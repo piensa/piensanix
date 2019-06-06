@@ -10,6 +10,6 @@
      ./kube.nix
     ];
 
-  system.stateVersion = "unstable";
+  system.stateVersion = "19.03";
 
 }

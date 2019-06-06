@@ -36,7 +36,7 @@
 
   users.users.x = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "video" "docker" "adbusers" ];
+    extraGroups = [ "networkmanager" "video" "docker" "adbusers" "libvirt"];
     home = "/x";
     packages = with pkgs; [
       git vim mutt spectacle htop
@@ -53,7 +53,7 @@
       libreoffice
       ncurses
       pciutils
-
+      shotcut
       android-studio
    ];
   };
@@ -69,7 +69,7 @@
   networking.networkmanager.enable = true;
   networking.hostName = "oxygen";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8"];
-  networking.firewall.enable = false;
+  networking.firewall.enable = true;
   time.timeZone = "America/Bogota";
 
 }
