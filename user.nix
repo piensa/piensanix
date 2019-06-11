@@ -55,6 +55,7 @@
       pciutils
       shotcut
       android-studio
+      restic
    ];
   };
 
