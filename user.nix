@@ -44,7 +44,7 @@
       tcpdump telnet openssh
       sops
       firefox google-chrome
-      keepass-with-plugins
+      #keepass-with-plugins
       blender
       krita inkscape gimp godot
       qgis
@@ -66,11 +66,5 @@
     ripgrep
     exfat-utils
   ];
-
-  networking.networkmanager.enable = true;
-  networking.hostName = "oxygen";
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8"];
-  networking.firewall.enable = true;
-  time.timeZone = "America/Bogota";
 
 }

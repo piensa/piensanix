@@ -3,12 +3,12 @@
 {
   imports =
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-     ./host.nix
+     ./msi.nix
      ./user.nix
      ./i3.nix
-     ./sway.nix
+     #./sway.nix
      ./piensa.nix
-     #./kube.nix
+     ./kube.nix
     ];
 
   system.stateVersion = "19.03";

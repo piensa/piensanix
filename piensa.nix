@@ -151,6 +151,7 @@ iframe_ui_provider = "http://localhost:9998/iframeuisvc"
 in rec {
   environment.systemPackages = with pkgs; [
     piensa.reva
+    piensa.dbxcli
     owncloud-client
   ];
 
