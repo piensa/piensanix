@@ -7,7 +7,8 @@
      ./user.nix
      ./i3.nix
      ./sway.nix
-     ./kube.nix
+     ./piensa.nix
+     #./kube.nix
     ];
 
   system.stateVersion = "19.03";
