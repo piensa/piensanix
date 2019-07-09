@@ -27,7 +27,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -192,6 +192,7 @@ in
   services.xserver.desktopManager.xterm.enable = false;
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";

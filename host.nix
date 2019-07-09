@@ -62,10 +62,6 @@
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
-  networking.networkmanager.enable = true;
-  networking.hostName = "oxygen";
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8"];
-  networking.firewall.enable = true;
   time.timeZone = "America/Bogota";
 
 

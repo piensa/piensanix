@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
- piensa = import (builtins.fetchTarball https://github.com/piensa/nur-packages/archive/master.tar.gz) {};
+ piensa = import (builtins.fetchTarball https://github.com/piensa/nur-packages/archive/dc91257.tar.gz) {};
   revad-config = pkgs.writeText "revad.toml" ''
 [core]
 log_file = "stderr"
@@ -153,6 +153,7 @@ in rec {
     piensa.reva
     piensa.dbxcli
     owncloud-client
+    piensa.bemenu
   ];
 
   systemd.services.revad = {

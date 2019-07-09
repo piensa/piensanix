@@ -56,6 +56,9 @@
       shotcut
       android-studio
       restic
+      alacritty
+      steam
+      zsnes
    ];
   };
 

@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  waylandOverlay = (import (builtins.fetchTarball ({
-    url = "https://github.com/piensa/wayner/archive/1e62268.tar.gz";
-    sha256 = "07hzhdc9ic3sk4ivd0g3lx2f7jnr3wkrrr884hf5b1n7adzglh50";
-   })));
   i3statusbarconfig = pkgs.writeText "i3statusbar-config" ''
     theme = "solarized-dark"
     icons = "awesome"
@@ -304,7 +300,7 @@ in
    pkgs.coreutils # for chgrp
   ];
 
-  nixpkgs.overlays = [ waylandOverlay ];
+  #nixpkgs.overlays = [ waylandOverlay ];
 
   programs.sway = { 
     enable = true;
@@ -319,17 +315,17 @@ in
     extraPackages = with pkgs; [
      swayidle
      swaylock
-     waybar
+     #waybar
      i3status-rust
      grim
      slurp
      mako
      wl-clipboard
-     wlstream
-     oguri
-     kanshi
-     redshift-wayland
-     xdg-desktop-portal-wlr
+     #wlstream
+     #oguri
+     #kanshi
+     #redshift-wayland
+     #xdg-desktop-portal-wlr
     ];
   };
 
@@ -339,11 +335,10 @@ in
     firefox-wayland
     mutt spectacle htop
     j4-dmenu-desktop
-    bemenu
     termite
-    wayfire
-    waybox
-    bspwc
+    #wayfire
+    #waybox
+    #bspwc
     qt5.qtwayland
     light
     ncurses
