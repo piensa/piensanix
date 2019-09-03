@@ -5,14 +5,14 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   
-#  nix.allowedUsers = [ "@users" ];
-#  nix.useSandbox = false;
-#  security.hideProcessInformation = true;
+  nix.allowedUsers = [ "@users" ];
+  nix.useSandbox = false;
+  security.hideProcessInformation = true;
 #  security.lockKernelModules = true;
 #  security.allowUserNamespaces = false;
-#  security.protectKernelImage = true;
+  security.protectKernelImage = true;
   security.allowSimultaneousMultithreading = false;
-#  security.virtualization.flushL1DataCache = "always";
+  security.virtualization.flushL1DataCache = "always";
 
   boot.kernelPackages = pkgs.linuxPackages_hardened;
 
@@ -36,69 +36,69 @@
     "amd_iommu=pt" "ivrs_ioapic[32]=00:14.0" "iommu=soft"
   ];
 
-#  # Restrict ptrace() usage to processes with a pre-defined relationship
-#  # (e.g., parent/child)
-#  boot.kernel.sysctl."kernel.yama.ptrace_scope" = 1;
-#
-#  # Restrict access to kernel ring buffer (information leaks)
-#  boot.kernel.sysctl."kernel.dmesg_restrict" = true;
-#
-#  # Hide kptrs even for processes with CAP_SYSLOG
-#  #boot.kernel.sysctl."kernel.kptr_restrict" = 2;
-#
-#  # Unprivileged access to bpf() has been used for privilege escalation in
-#  # the past
-#  boot.kernel.sysctl."kernel.unprivileged_bpf_disabled" = true;
-#
-#  # Disable bpf() JIT (to eliminate spray attacks)
-#  boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
-#
-#  # ... or at least apply some hardening to it
-#  boot.kernel.sysctl."net.core.bpf_jit_harden" = true;
-#
-#  # Allowing users to mmap() memory starting at virtual address 0 can turn a
-#  # NULL dereference bug in the kernel into code execution with elevated
-#  # privilege.  Mitigate by enforcing a minimum base addr beyond the NULL memory
-#  # space.  This breaks applications that require mapping the 0 page, such as
-#  # dosemu or running 16bit applications under wine.  It also breaks older
-#  # versions of qemu.
-#  #
-#  # The value is taken from the KSPP recommendations (Debian uses 4096).
-#  boot.kernel.sysctl."vm.mmap_min_addr" = 65536;
-#
-#  # Disable ftrace debugging
-#  boot.kernel.sysctl."kernel.ftrace_enabled" = false;
-#
-#  # Enable reverse path filtering (that is, do not attempt to route packets
-#  # that "obviously" do not belong to the iface's network; dropped packets are
-#  # logged as martians).
-#  boot.kernel.sysctl."net.ipv4.conf.all.log_martians" = true;
-#  boot.kernel.sysctl."net.ipv4.conf.all.rp_filter" = true;
-#  boot.kernel.sysctl."net.ipv4.conf.default.log_martians" = true;
-#  boot.kernel.sysctl."net.ipv4.conf.default.rp_filter" = true;
+  # Restrict ptrace() usage to processes with a pre-defined relationship
+  # (e.g., parent/child)
+  boot.kernel.sysctl."kernel.yama.ptrace_scope" = 1;
 
-#  # Ignore broadcast ICMP (mitigate SMURF)
-#  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" = true;
+  # Restrict access to kernel ring buffer (information leaks)
+  boot.kernel.sysctl."kernel.dmesg_restrict" = true;
 
-#  # Ignore route information from sender
-#  boot.kernel.sysctl."net.ipv4.conf.all.accept_source_route" = false;
-#  boot.kernel.sysctl."net.ipv4.conf.default.accept_source_route" = false;
-#  boot.kernel.sysctl."net.ipv6.conf.all.accept_source_route" = false;
-#  boot.kernel.sysctl."net.ipv6.conf.default.accept_source_route" = false;
-#
-#  # Ignore incoming ICMP redirects (note: default is needed to ensure that the
-#  # setting is applied to interfaces added after the sysctls are set)
-#  boot.kernel.sysctl."net.ipv4.conf.all.accept_redirects" = false;
-#  boot.kernel.sysctl."net.ipv4.conf.all.secure_redirects" = false;
-#  boot.kernel.sysctl."net.ipv4.conf.default.accept_redirects" = false;
-#  boot.kernel.sysctl."net.ipv4.conf.default.secure_redirects" = false;
-#  boot.kernel.sysctl."net.ipv6.conf.all.accept_redirects" = false;
-#  boot.kernel.sysctl."net.ipv6.conf.default.accept_redirects" = false;
+  # Hide kptrs even for processes with CAP_SYSLOG
+  #boot.kernel.sysctl."kernel.kptr_restrict" = 2;
 
-#  # Ignore outgoing ICMP redirects (this is ipv4 only)
-#  boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" = false;
-#  boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" = false;
- 
+  # Unprivileged access to bpf() has been used for privilege escalation in
+  # the past
+  boot.kernel.sysctl."kernel.unprivileged_bpf_disabled" = true;
+
+  # Disable bpf() JIT (to eliminate spray attacks)
+  boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
+
+  # ... or at least apply some hardening to it
+  boot.kernel.sysctl."net.core.bpf_jit_harden" = true;
+
+  # Allowing users to mmap() memory starting at virtual address 0 can turn a
+  # NULL dereference bug in the kernel into code execution with elevated
+  # privilege.  Mitigate by enforcing a minimum base addr beyond the NULL memory
+  # space.  This breaks applications that require mapping the 0 page, such as
+  # dosemu or running 16bit applications under wine.  It also breaks older
+  # versions of qemu.
+  #
+  # The value is taken from the KSPP recommendations (Debian uses 4096).
+  boot.kernel.sysctl."vm.mmap_min_addr" = 65536;
+
+  # Disable ftrace debugging
+  boot.kernel.sysctl."kernel.ftrace_enabled" = false;
+
+  # Enable reverse path filtering (that is, do not attempt to route packets
+  # that "obviously" do not belong to the iface's network; dropped packets are
+  # logged as martians).
+  boot.kernel.sysctl."net.ipv4.conf.all.log_martians" = true;
+  boot.kernel.sysctl."net.ipv4.conf.all.rp_filter" = true;
+  boot.kernel.sysctl."net.ipv4.conf.default.log_martians" = true;
+  boot.kernel.sysctl."net.ipv4.conf.default.rp_filter" = true;
+
+  # Ignore broadcast ICMP (mitigate SMURF)
+  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" = true;
+
+  # Ignore route information from sender
+  boot.kernel.sysctl."net.ipv4.conf.all.accept_source_route" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.accept_source_route" = false;
+  boot.kernel.sysctl."net.ipv6.conf.all.accept_source_route" = false;
+  boot.kernel.sysctl."net.ipv6.conf.default.accept_source_route" = false;
+
+  # Ignore incoming ICMP redirects (note: default is needed to ensure that the
+  # setting is applied to interfaces added after the sysctls are set)
+  boot.kernel.sysctl."net.ipv4.conf.all.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.all.secure_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.secure_redirects" = false;
+  boot.kernel.sysctl."net.ipv6.conf.all.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv6.conf.default.accept_redirects" = false;
+
+  # Ignore outgoing ICMP redirects (this is ipv4 only)
+  boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" = false;
+
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "btrfs";
   zramSwap.enable = true;
