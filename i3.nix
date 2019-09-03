@@ -27,7 +27,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -171,8 +171,8 @@ bar {
 in
 {
   # required for steam https://nixos.wiki/wiki/Steam
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
+  hardware.opengl.driSupport32Bit = false;
+  hardware.pulseaudio.support32Bit = false;
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.windowManager.i3.configFile = "${i3config}";
@@ -200,8 +200,8 @@ in
   services.xserver.libinput.enable = true;
 
   # Enable the KDE Desktop Environment.
-  #services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enable = false;
+  services.xserver.desktopManager.plasma5.enable = true;
 
 
 }
