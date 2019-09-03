@@ -348,5 +348,7 @@ in
     light
     ncurses
     pciutils
+    alacritty
+    kitty
   ];
 }
