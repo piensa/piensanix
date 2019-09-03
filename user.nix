@@ -6,6 +6,7 @@
     fonts = with pkgs; [
       corefonts
       #vistafonts
+      #inter
       inconsolata
       terminus_font
       proggyfonts
@@ -16,8 +17,20 @@
       source-sans-pro
       source-serif-pro
     ];
+   
+# fontconfig = {
+#       penultimate.enable = false;
+#       defaultFonts = {
+#         monospace = ["inter"];
+#         sansSerif = ["inter"];
+#         serif = ["inter"];
+#      };
+#    };
   };
 
+  services.logind.extraConfig = ''
+    RuntimeDirectorySize=8G
+  '';
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -56,6 +69,8 @@
       shotcut
       android-studio
       restic
+      kubectl
+      dosbox
    ];
   };
 
@@ -65,10 +80,11 @@
     tcpdump
     ripgrep
     exfat-utils
+    docker-compose
   ];
 
   networking.networkmanager.enable = true;
-  networking.hostName = "oxygen";
+  networking.hostName = "hydrogen";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8"];
   networking.firewall.enable = true;
   time.timeZone = "America/Bogota";
