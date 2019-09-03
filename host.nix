@@ -8,8 +8,9 @@
   nix.allowedUsers = [ "@users" ];
   nix.useSandbox = false;
   security.hideProcessInformation = true;
-#  security.lockKernelModules = true;
-#  security.allowUserNamespaces = false;
+  # Setting this one to true is preferred but makes wifi not work on my  HP Envy.
+  security.lockKernelModules = false;
+  security.allowUserNamespaces = false;
   security.protectKernelImage = true;
   security.allowSimultaneousMultithreading = false;
   security.virtualization.flushL1DataCache = "always";
