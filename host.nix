@@ -11,7 +11,7 @@
 #  security.lockKernelModules = true;
 #  security.allowUserNamespaces = false;
 #  security.protectKernelImage = true;
-#  security.allowSimultaneousMultithreading = false;
+  security.allowSimultaneousMultithreading = false;
 #  security.virtualization.flushL1DataCache = "always";
 
   boot.kernelPackages = pkgs.linuxPackages_hardened;
